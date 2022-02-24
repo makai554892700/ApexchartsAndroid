@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="chart" style="height: 100%"></div>
+<script type="text/javascript" src="./apexcharts.min.js"></script>
+<script type="text/javascript">
+             var options = {
+                series: [{
+                    name: "Desktops",
+                    data: []
+                }],
+                chart: {
+                  type: 'line',
+                  zoom: {
+                    enabled: false
+                  }
+                },
+                noData:{
+                    text: ['Data loading...', 'Please wait']
+                },
+                dataLabels: {
+                  enabled: false
+                },
+                stroke: {
+                   width: [1, 1, 1],
+                   curve: 'straight',
+                   dashArray: [0, 5, 5]
+                },
+                title: {
+                  text: '',
+                  align: 'left'
+                },
+                grid: {
+                  row: {
+                    colors: ['#f3f3f3', 'transparent'],
+                    opacity: 0.1
+                  },
+                },
+                xaxis: {
+                  categories: [],
+                }
+            };
+            var chart = new ApexCharts(
+              document.querySelector("#chart"),
+              options
+            );
+            chart.render();
+            function refreshUI(dataJson){
+                var data = JSON.parse(dataJson);
+                if (data && typeof data ==="object") {
+                    chart.updateSeries([{
+                        data: data
+                    }]);
+                }
+            }
+</script>
+</body>
+</html>
